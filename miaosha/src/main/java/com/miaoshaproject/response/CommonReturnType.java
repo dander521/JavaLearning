@@ -7,7 +7,7 @@ public class CommonReturnType {
 
 
     public static CommonReturnType creat(Object result) {
-        return CommonReturnType.creat(result, "Success");
+        return CommonReturnType.creat(result, "success");
     }
 
     public static CommonReturnType creat(Object result, String status) {
