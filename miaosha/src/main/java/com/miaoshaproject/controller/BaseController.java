@@ -14,6 +14,8 @@ import java.util.Map;
 
 public class BaseController {
 
+    public static final String CONTENT_TYPE_FORMED="application/x-www-form-urlencoded";
+
     // 定义exceptionhandler 解决exception
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.OK)
@@ -28,6 +30,7 @@ public class BaseController {
             responseData.put("errCode", EmBusinessError.UNKNOW_ERROR.getErrorCode());
             responseData.put("errMsg", EmBusinessError.UNKNOW_ERROR.getErrorMsg());
         }
+        ex.printStackTrace();
         return CommonReturnType.creat(responseData, "fail");
     }
 }
