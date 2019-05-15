@@ -1,11 +1,13 @@
 package com.miaoshaproject.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.miaoshaproject.controller.viewObject.UserVO;
 import com.miaoshaproject.error.BusinessException;
 import com.miaoshaproject.error.EmBusinessError;
 import com.miaoshaproject.response.CommonReturnType;
 import com.miaoshaproject.service.UserService;
 import com.miaoshaproject.service.model.UserModel;
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,28 @@ public class UserController extends BaseController {
     @Autowired
     private HttpServletRequest httpServletRequest;
 
+    @RequestMapping(value = "/register", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
+    @ResponseBody
+    public CommonReturnType register(String name, String otpCode, Integer age, Byte gender, String telephone, String password) throws BusinessException {
+
+        String inSessionOptCode = (String) this.httpServletRequest.getSession().getAttribute(telephone);
+        if (!StringUtils.equals(otpCode, inSessionOptCode)) {
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "短信验证码不符");
+        }
+
+        UserModel userModel = new UserModel();
+        userModel.setName(name);
+        userModel.setAge(age);
+        userModel.setGender(gender);
+        userModel.setTelephone(Integer.valueOf(telephone));
+        userModel.setRegisterMode("byphone");
+        userModel.setEncrptPassword(MD5Encoder.encode(password.getBytes()));
+        userService.register(userModel);
+
+        return CommonReturnType.creat(null);
+    }
+
+
     @RequestMapping(value = "/getOtp", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
     @ResponseBody
     public CommonReturnType getOtp(String telephone) throws BusinessException {
@@ -47,7 +71,7 @@ public class UserController extends BaseController {
         // 第三方平台发送
         System.out.println("telephone = " + telephone + " & otpCode = " + otpCode);
 
-        return CommonReturnType.creat(null, "success");
+        return CommonReturnType.creat(null);
     }
 
     @RequestMapping("/get")
