@@ -108,7 +108,7 @@
                         if (data.status == "success") {
                             alert("注册成功");
                         } else {
-                            alert("请求成功，结果失败");
+                            alert("请求成功，结果失败原因为" + data.data.errMsg);
                         }
                     },
                     error:function (data) {
