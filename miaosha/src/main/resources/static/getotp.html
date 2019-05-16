@@ -49,7 +49,7 @@
                             alert("请求成功，opt已经发送到您的手机上，请注意查收");
                             window.location.href="register.html";
                         } else {
-                            alert("请求成功，结果失败");
+                            alert("请求成功，原因为" + data.data.errMsg);
                         }
                     },
                     error:function (data) {

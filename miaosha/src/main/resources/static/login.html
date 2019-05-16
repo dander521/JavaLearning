@@ -65,7 +65,7 @@
                         if (data.status == "success") {
                             alert("登陆成功");
                         } else {
-                            alert("请求成功，登陆失败");
+                            alert("请求成功，登陆失败原因为" + data.data.errMsg);
                         }
                     },
                     error:function (data) {
