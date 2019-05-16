@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Controller("item")
 @RequestMapping("/item")
@@ -43,7 +45,7 @@ public class ItemController extends BaseController {
         return CommonReturnType.creat(itemVO);
     }
 
-    @RequestMapping(value = "/getItem", method = {RequestMethod.GET}, consumes = {CONTENT_TYPE_FORMED})
+    @RequestMapping(value = "/getItem", method = {RequestMethod.GET})
     @ResponseBody
     public CommonReturnType getItem(Integer id) {
         ItemModel itemModel = itemService.getItemById(id);
@@ -58,5 +60,17 @@ public class ItemController extends BaseController {
         ItemVO itemVO = new ItemVO();
         BeanUtils.copyProperties(itemModel, itemVO);
         return itemVO;
+    }
+
+    @RequestMapping(value = "/list", method = {RequestMethod.GET})
+    @ResponseBody
+    public CommonReturnType getItemList() {
+        List<ItemModel> itemModelList = itemService.listItem();
+
+        List<ItemVO> itemVOList = itemModelList.stream().map(itemModel -> {
+            ItemVO itemVO = this.convertVOFromItemModel(itemModel);
+            return itemVO;
+        }).collect(Collectors.toList());
+        return CommonReturnType.creat(itemVOList);
     }
 }
