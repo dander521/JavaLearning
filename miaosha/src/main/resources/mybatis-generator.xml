@@ -26,8 +26,13 @@
                              type="XMLMAPPER"/>
 
 
-        <table tableName="user_info" domainObjectName="UserDO"></table>
-        <table tableName="user_password" domainObjectName="UserPasswordDO"></table>
+<!--        <table tableName="user_info" domainObjectName="UserDO"></table>-->
+<!--        <table tableName="user_password" domainObjectName="UserPasswordDO"></table>-->
+
+        <table tableName="item" domainObjectName="ItemDO"></table>
+        <table tableName="item_stock" domainObjectName="ItemStockDO"></table>
+
+
 
     </context>
 </generatorConfiguration>

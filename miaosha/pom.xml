@@ -141,7 +141,7 @@
           <configuration>
               <!-- 对应generator配置文件的路径 -->
               <configurationFile>${basedir}/src/main/resources/mybatis-generator.xml</configurationFile>
-              <overwrite>true</overwrite>
+              <overwrite>false</overwrite>
               <verbose>true</verbose>
           </configuration>
           </plugin>
