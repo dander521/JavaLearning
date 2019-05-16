@@ -7,7 +7,6 @@ import com.miaoshaproject.error.EmBusinessError;
 import com.miaoshaproject.response.CommonReturnType;
 import com.miaoshaproject.service.UserService;
 import com.miaoshaproject.service.model.UserModel;
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +14,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 
@@ -31,9 +34,27 @@ public class UserController extends BaseController {
     @Autowired
     private HttpServletRequest httpServletRequest;
 
+
+    @RequestMapping(value = "/login", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
+    @ResponseBody
+    public CommonReturnType login(String telephone, String password) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
+
+        if (StringUtils.isEmpty(telephone) || StringUtils.isEmpty(password)) {
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "手机号和密码不能为空");
+        }
+
+        UserModel userModel = userService.validateLogin(telephone, EncodeByMD5(password));
+
+        this.httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
+        this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
+
+        return CommonReturnType.creat(null);
+    }
+
+
     @RequestMapping(value = "/register", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
     @ResponseBody
-    public CommonReturnType register(String name, String otpCode, Integer age, Byte gender, String telephone, String password) throws BusinessException {
+    public CommonReturnType register(String name, String otpCode, Integer age, Byte gender, String telephone, String password) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
 
         String inSessionOptCode = (String) this.httpServletRequest.getSession().getAttribute(telephone);
         if (!StringUtils.equals(otpCode, inSessionOptCode)) {
@@ -44,14 +65,21 @@ public class UserController extends BaseController {
         userModel.setName(name);
         userModel.setAge(age);
         userModel.setGender(gender);
-        userModel.setTelephone(Integer.valueOf(telephone));
+        userModel.setTelephone(telephone);
         userModel.setRegisterMode("byphone");
-        userModel.setEncrptPassword(MD5Encoder.encode(password.getBytes()));
+        userModel.setEncrptPassword(EncodeByMD5(password));
+        userModel.setId(String.valueOf(System.currentTimeMillis()));
         userService.register(userModel);
 
         return CommonReturnType.creat(null);
     }
 
+    public String EncodeByMD5(String str) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        BASE64Encoder base64Encoder = new BASE64Encoder();
+        String resultStr = base64Encoder.encode(md5.digest(str.getBytes("utf-8")));
+        return resultStr;
+    }
 
     @RequestMapping(value = "/getOtp", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
     @ResponseBody
@@ -76,7 +104,7 @@ public class UserController extends BaseController {
 
     @RequestMapping("/get")
     @ResponseBody
-    public CommonReturnType getUser(Integer id) throws BusinessException {
+    public CommonReturnType getUser(String id) throws BusinessException {
         if (id == null) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }

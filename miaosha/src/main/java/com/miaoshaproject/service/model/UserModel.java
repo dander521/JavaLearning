@@ -1,20 +1,20 @@
 package com.miaoshaproject.service.model;
 
 public class UserModel {
-    private Integer id;
+    private String id;
     private String name;
     private Byte gender;
     private Integer age;
-    private Integer telephone;
+    private String telephone;
     private String registerMode;
     private String thirdPartyId;
     private String encrptPassword;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -42,11 +42,11 @@ public class UserModel {
         this.age = age;
     }
 
-    public Integer getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 

@@ -19,9 +19,39 @@
                     <input class="form-control" type="text" placeholder="手机号" name="telephone" id="telephone" />
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label">用户昵称</label>
+                <div>
+                    <input class="form-control" type="text" placeholder="用户昵称" name="name" id="name" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">性别</label>
+                <div>
+                    <input class="form-control" type="text" placeholder="性别" name="gender" id="gender" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">年龄</label>
+                <div>
+                    <input class="form-control" type="text" placeholder="年龄" name="age" id="age" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">验证码</label>
+                <div>
+                    <input class="form-control" type="text" placeholder="验证码" name="otpCpde" id="otpCode" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">密码</label>
+                <div>
+                    <input class="form-control" type="password" placeholder="密码" name="password" id="password" />
+                </div>
+            </div>
             <div class="form-actions">
-                <button class="btn blue" id="getopt" type="submit">
-                    获取otp短信
+                <button class="btn blue" id="register" type="submit">
+                    提交注册
                 </button>
             </div>
         </div>
@@ -29,8 +59,33 @@
 
     <script>
         jQuery(document).ready(function() {
-            $("#getopt").on("click", function () {
+            $("#register").on("click", function () {
                 var telephone = $("#telephone").val();
+                var password = $("#password").val();
+                var age = $("#age").val();
+                var gender = $("#gender").val();
+                var name = $("#name").val();
+                var otpCode = $("#otpCode").val();
+                if (password == null || password == "") {
+                    alert("密码不能为空");
+                    return false;
+                }
+                if (age == null || age == "") {
+                    alert("年龄不能为空");
+                    return false;
+                }
+                if (gender == null || gender == "") {
+                    alert("性别不能为空");
+                    return false;
+                }
+                if (name == null || name == "") {
+                    alert("姓名不能为空");
+                    return false;
+                }
+                if (otpCode == null || otpCode == "") {
+                    alert("验证码不能为空");
+                    return false;
+                }
                 if (telephone == null || telephone == "") {
                     alert("手机号不能为空");
                     return false;
@@ -38,27 +93,30 @@
                 $.ajax({
                     type:"POST",
                     contentType:"application/x-www-form-urlencoded",
-                    url:"http://localhost:8080/user/getOtp",
+                    url:"http://localhost:8080/user/register",
                     data:{
-                        telephone:$("#telephone").val()
+                        "telephone":telephone,
+                        "password":password,
+                        "age":age,
+                        "gender":gender,
+                        "otpCode":otpCode,
+                        "name":name
                     },
+                    xhrFields:{withCredentials:true}, // 跨域可受 保证session参数相符
                     success:function(data) {
                         alert("请求成功");
                         if (data.status == "success") {
-                            alert("请求成功，opt已经发送到您的手机上，请注意查收");
+                            alert("注册成功");
                         } else {
                             alert("请求成功，结果失败");
                         }
                     },
                     error:function (data) {
-                        alert("请求报错 原因为"+data.responseText);
+                        alert("注册失败 原因为"+data.responseText);
                     }
                 });
                 return false;
             });
         });
-
-
-
     </script>
 </html>

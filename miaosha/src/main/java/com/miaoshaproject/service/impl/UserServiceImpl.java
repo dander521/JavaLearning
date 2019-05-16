@@ -11,6 +11,7 @@ import com.miaoshaproject.service.UserService;
 import com.miaoshaproject.service.model.UserModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +22,22 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserPasswordDOMapper userPasswordDOMapper;
+
+    @Override
+    public UserModel validateLogin(String telephone, String encrptPassword) throws BusinessException {
+        UserDO userDO = userDOMapper.selectByTelephone(telephone);
+        if (userDO == null) {
+            throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL);
+        }
+        String userId = userDO.getId();
+        UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByUserId(userId);
+        UserModel userModel = convertFromDataObject(userDO, userPasswordDO);
+
+        if (!StringUtils.equals(encrptPassword, userModel.getEncrptPassword())) {
+            throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL);
+        }
+        return userModel;
+    }
 
     @Override
     public void register(UserModel userModel) throws BusinessException {
@@ -36,13 +53,18 @@ public class UserServiceImpl implements UserService {
         }
 
         UserDO userDO = convertFromModel(userModel);
-        userDOMapper.insert(userDO);
+        try {
+            userDOMapper.insert(userDO);
+        } catch (DuplicateKeyException ex) {
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "手机号已存在");
+        }
+
         UserPasswordDO userPasswordDO = convertPasswordFromModel(userModel);
         userPasswordDOMapper.insert(userPasswordDO);
     }
 
     @Override
-    public UserModel getUserById(Integer id) {
+    public UserModel getUserById(String id) {
         UserDO userDO = userDOMapper.selectByPrimaryKey(id);
         if (userDO == null) {
             return null;

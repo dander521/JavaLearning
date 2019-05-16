@@ -2,17 +2,17 @@ package com.miaoshaproject.controller.viewObject;
 
 public class UserVO {
 
-    private Integer id;
+    private String  id;
     private String name;
     private Byte gender;
     private Integer age;
-    private Integer telephone;
+    private String telephone;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -40,11 +40,11 @@ public class UserVO {
         this.age = age;
     }
 
-    public Integer getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 }
