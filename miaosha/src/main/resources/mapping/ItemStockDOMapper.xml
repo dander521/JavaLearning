@@ -74,7 +74,7 @@
 
   <update id="decreaseStock">
     update item_stock
-    set stock = stock - #{amount},
+    set stock = stock - #{amount}
     where item_id = #{itemId} and stock >= #{amount}
   </update>
 
