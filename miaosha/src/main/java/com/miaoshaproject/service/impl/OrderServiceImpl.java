@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderModel createOrder(String userId, Integer itemId, Integer amount) throws BusinessException {
+    public OrderModel createOrder(String userId, Integer itemId, Integer promoId, Integer amount) throws BusinessException {
 
 
         // 校验 商品存在 用户合法 数量正确
@@ -57,7 +57,13 @@ public class OrderServiceImpl implements OrderService {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "数量信息不正确");
         }
 
-
+        if (promoId != null) {
+            if (promoId != itemModel.getPromoModel().getId()) {
+                throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "活动信息不正确");
+            }
+        } else if (itemModel.getPromoModel().getStatus() != 2) {
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "活动信息不正确");
+        }
 
         // 落单减少库存
         boolean result = itemService.decreaseStock(itemId, amount);
@@ -70,9 +76,10 @@ public class OrderServiceImpl implements OrderService {
         orderModel.setUserId(userId);
         orderModel.setItemId(itemId);
         orderModel.setAmount(amount);
-        orderModel.setItemPrice(itemModel.getPrice());
-        orderModel.setOrderPrice(itemModel.getPrice().multiply(new BigDecimal(amount)));
+        orderModel.setItemPrice(promoId != null ? itemModel.getPromoModel().getPromoItemPrice() : itemModel.getPrice());
+        orderModel.setOrderPrice(orderModel.getItemPrice().multiply(new BigDecimal(amount)));
         orderModel.setId(generateOrderNo());
+        orderModel.setPromoId(promoId);
         OrderDO orderDO = this.convertFromOrderModel(orderModel);
         orderDOMapper.insert(orderDO);
 
@@ -116,4 +123,5 @@ public class OrderServiceImpl implements OrderService {
         orderDO.setOrderPrice(orderModel.getOrderPrice().doubleValue());
         return orderDO;
     }
+
 }

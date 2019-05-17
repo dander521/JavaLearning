@@ -87,7 +87,8 @@
                     url:"http://localhost:8080/order/createOrder",
                     data:{
                         "itemId": g_itemVO.id,
-                        "amount": 1
+                        "amount": 1,
+                        "promoId":g_itemVO.promoId
                     },
                     xhrFields:{withCredentials:true}, // 跨域可受 保证session参数相符
                     success:function(data) {

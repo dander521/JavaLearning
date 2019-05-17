@@ -11,6 +11,8 @@ public class OrderModel {
 
     private Integer itemId;
 
+    private Integer promoId;
+
     // 单价
     private BigDecimal itemPrice;
 
@@ -19,6 +21,14 @@ public class OrderModel {
 
     // 总金额
     private BigDecimal orderPrice;
+
+    public Integer getPromoId() {
+        return promoId;
+    }
+
+    public void setPromoId(Integer promoId) {
+        this.promoId = promoId;
+    }
 
     public BigDecimal getItemPrice() {
         return itemPrice;
