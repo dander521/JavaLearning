@@ -92,6 +92,7 @@ public class OrderServiceImpl implements OrderService {
         String nowDate = now.format(DateTimeFormatter.ISO_DATE).replace("-", "");
         stringBuilder.append(nowDate);
         // 中间6位 自增
+        // TODO: 自增超过999999 需要添加两个字段 initialValue 和 maxValue 进行自增重置
         int sequence = 0;
         SequenceDO sequenceDO = sequenceDOMapper.getSequenceByName("order_info");
         sequence = sequenceDO.getCurrentValue();
@@ -102,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
             stringBuilder.append(0);
         }
         stringBuilder.append(sequenceStr);
-        // 最后两位 分库分表位 00-99
+        // TODO:最后两位 分库分表位 00-99 具体项目中需要根据特定方式进行处理
         stringBuilder.append("00");
         return stringBuilder.toString();
     }
