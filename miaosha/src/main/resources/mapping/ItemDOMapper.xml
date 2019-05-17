@@ -69,4 +69,10 @@
     select id, title, price, description, sales, img_url
     from item
   </select>
+
+  <update id="increaseSales">
+    update item
+    set sales = sales + #{amount},
+    where id = #{itemId,jdbcType=INTEGER}
+  </update>
 </mapper>
