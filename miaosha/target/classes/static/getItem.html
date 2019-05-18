@@ -14,7 +14,7 @@
         <div class="content">
             <h3 class="form-title">商品详情</h3>
             <div id="promoStartDateContainer" class="form-group">
-                <label style="color: red" class="control-label">秒杀开始时间</label>
+                <label  style="color: blue" id="promoStatus" class="control-label"></label>
                 <div>
                     <label style="color: red" class="control-label" id="promoStartDate" />
                 </div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label">价格</label>
+                <label id="normalPriceContainer" class="control-label">价格</label>
                 <div>
                     <label class="control-label" id="price" />
                 </div>
@@ -87,7 +87,8 @@
                     url:"http://localhost:8080/order/createOrder",
                     data:{
                         "itemId": g_itemVO.id,
-                        "amount": 1
+                        "amount": 1,
+                        "promoId":g_itemVO.promoId
                     },
                     xhrFields:{withCredentials:true}, // 跨域可受 保证session参数相符
                     success:function(data) {
@@ -118,6 +119,7 @@
                     if (data.status == "success") {
                         g_itemVO = data.data;
                         reloadDom();
+                        setInterval(reloadDom, 1000);
                     } else {
                         alert("请求成功，结果失败原因为" + data.data.errMsg);
                     }
@@ -135,6 +137,27 @@
             $("#price").text(g_itemVO.price);
             $("#stock").text(g_itemVO.stock);
             $("#sales").text(g_itemVO.sales);
+            if (g_itemVO.promoStatus == 1) {
+
+                var startTime = g_itemVO.startDate.replace(new RegExp("-","gm"), "/");
+                startTime = (new Date(startTime)).getTime();
+                var nowTime = Date.parse(new Date());
+                var delta = (startTime - nowTime)/1000;
+
+                if (delta <= 0) {
+                    g_itemVO.promoStatus = 2;
+                    reloadDom();
+                }
+
+                $("#promoStartDate").text("秒杀活动将于："+g_itemVO.startDate+ " 开始售卖 倒计时:" + delta + "秒");
+                $("#promoPrice").text(g_itemVO.promoPrice);
+                $("#createOrder").attr("disabled", true);
+            } else if (g_itemVO.promoStatus == 2) {
+                $("#promoStartDate").text("秒杀正在进行中");
+                $("#promoPrice").text(g_itemVO.promoPrice);
+                $("#createOrder").attr("disabled", false);
+                $("#normalPriceContainer").hide();
+            }
         }
     </script>
 </html>
