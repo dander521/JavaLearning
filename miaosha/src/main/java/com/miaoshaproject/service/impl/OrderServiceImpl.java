@@ -61,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
             if (promoId != itemModel.getPromoModel().getId()) {
                 throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "活动信息不正确");
             }
-        } else if (itemModel.getPromoModel().getStatus() != 2) {
+        } else if (itemModel.getPromoModel() != null && itemModel.getPromoModel().getStatus() != 2) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "活动信息不正确");
         }
 
@@ -79,7 +79,7 @@ public class OrderServiceImpl implements OrderService {
         orderModel.setItemPrice(promoId != null ? itemModel.getPromoModel().getPromoItemPrice() : itemModel.getPrice());
         orderModel.setOrderPrice(orderModel.getItemPrice().multiply(new BigDecimal(amount)));
         orderModel.setId(generateOrderNo());
-        orderModel.setPromoId(promoId);
+        orderModel.setPromoId(promoId == null ? 0 : promoId);
         OrderDO orderDO = this.convertFromOrderModel(orderModel);
         orderDOMapper.insert(orderDO);
 

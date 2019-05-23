@@ -82,10 +82,16 @@
         var g_itemVO = {};
         jQuery(document).ready(function() {
             $("#createOrder").on("click", function () {
+                var token = window.localStorage["token"];
+                if (token == null) {
+                    alert("没有登录");
+                    window.location.href="login.html";
+                    return;
+                }
                 $.ajax({
                     type:"POST",
                     contentType:"application/x-www-form-urlencoded",
-                    url:"http://"+g_host+"/order/createOrder",
+                    url:"http://"+g_host+"/order/createOrder?token="+token,
                     data:{
                         "itemId": g_itemVO.id,
                         "amount": 1,

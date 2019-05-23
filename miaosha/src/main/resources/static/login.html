@@ -41,6 +41,8 @@
         jQuery(document).ready(function() {
 
             $("#login").on("click", function () {
+
+
                 var telephone = $("#telephone").val();
                 var password = $("#password").val();
 
@@ -64,6 +66,8 @@
                     success:function(data) {
                         alert("请求成功");
                         if (data.status == "success") {
+                            var token = data.data;
+                            window.localStorage.setItem("token", token);
                             alert("登陆成功");
                             window.location.href="listItem.html";
                         } else {

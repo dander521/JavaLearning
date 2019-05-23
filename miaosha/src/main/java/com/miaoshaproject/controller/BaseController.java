@@ -18,7 +18,7 @@ public class BaseController {
 
 //    // 定义exceptionhandler 解决exception
 //    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(HttpStatus.OK)
+//    @ResponseStatus(HttpStatus.OK)PARAMETER_VALIDATION_ERROR
 //    @ResponseBody // 不添加 会寻找本地文件
 //    public Object handlerException(HttpServletRequest request, Exception ex) {
 //        Map<String, Object> responseData = new HashMap<>();
