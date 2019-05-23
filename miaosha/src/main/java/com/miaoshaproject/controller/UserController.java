@@ -43,6 +43,7 @@ public class UserController extends BaseController {
         UserModel userModel = userService.validateLogin(telephone, EncodeByMD5(password));
 
         this.httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
+        System.out.println("登录状态" + this.httpServletRequest.getSession().getAttribute("IS_LOGIN"));
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
 
         return CommonReturnType.creat(null);

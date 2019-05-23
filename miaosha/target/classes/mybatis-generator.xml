@@ -12,7 +12,7 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/miaosha?useSSL=false"
                         userId="root"
-                        password="123456">
+                        password="root">
         </jdbcConnection>
 
         <!-- 对于生成的pojo所在包 -->
@@ -32,6 +32,6 @@
 
 <!--        <table tableName="order_info" domainObjectName="OrderDO"></table>-->
 <!--        <table tableName="sequence_info" domainObjectName="SequenceDO"></table>-->
-        <table tableName="promo" domainObjectName="PromoDO"></table>
+<!--        <table tableName="promo" domainObjectName="PromoDO"></table>-->
     </context>
 </generatorConfiguration>

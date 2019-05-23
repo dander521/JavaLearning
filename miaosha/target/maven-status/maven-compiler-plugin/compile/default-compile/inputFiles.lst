@@ -19,9 +19,11 @@
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/error/CommonError.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/validator/ValidatorImpl.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/response/CommonReturnType.java
+/Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/congif/RedisConfig.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/dataObject/ItemStockDO.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/controller/UserController.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/service/model/PromoModel.java
+/Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/congif/WebServerConfiguration.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/dataObject/SequenceDO.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/App.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/service/impl/ItemServiceImpl.java

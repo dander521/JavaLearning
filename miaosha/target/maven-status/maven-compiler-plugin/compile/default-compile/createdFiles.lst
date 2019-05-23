@@ -9,6 +9,7 @@ com/miaoshaproject/service/impl/UserServiceImpl.class
 com/miaoshaproject/controller/viewObject/UserVO.class
 com/miaoshaproject/dataObject/UserPasswordDO.class
 com/miaoshaproject/service/OrderService.class
+com/miaoshaproject/congif/WebServerConfiguration$1.class
 com/miaoshaproject/controller/BaseController.class
 com/miaoshaproject/dao/UserDOMapper.class
 com/miaoshaproject/service/impl/OrderServiceImpl.class
@@ -34,7 +35,9 @@ com/miaoshaproject/dataObject/OrderDO.class
 com/miaoshaproject/service/impl/PromoServiceImpl.class
 com/miaoshaproject/service/model/UserModel.class
 com/miaoshaproject/controller/OrderController.class
+com/miaoshaproject/congif/RedisConfig.class
 com/miaoshaproject/dao/PromoDOMapper.class
 com/miaoshaproject/dao/ItemStockDOMapper.class
 com/miaoshaproject/dataObject/SequenceDO.class
+com/miaoshaproject/congif/WebServerConfiguration.class
 com/miaoshaproject/App.class
