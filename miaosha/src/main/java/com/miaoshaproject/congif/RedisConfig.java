@@ -32,7 +32,12 @@ public class RedisConfig {
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addSerializer(DateTime.class, new JodaDateTimeJsonSerializer());
         simpleModule.addDeserializer(DateTime.class, new JodaDateTimeJsonDeserializer());
+
+        // 告诉redis所取的对象属性类型
+        objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+
         objectMapper.registerModule(simpleModule);
+
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
 
