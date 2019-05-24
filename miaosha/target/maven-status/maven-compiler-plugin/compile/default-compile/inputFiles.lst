@@ -9,6 +9,7 @@
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/dao/UserDOMapper.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/service/impl/PromoServiceImpl.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/service/model/ItemModel.java
+/Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/serializer/JodaDateTimeJsonSerializer.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/service/OrderService.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/dao/PromoDOMapper.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/validator/ValidationResult.java
@@ -24,6 +25,7 @@
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/controller/UserController.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/service/model/PromoModel.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/congif/WebServerConfiguration.java
+/Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/serializer/JodaDateTimeJsonDeserializer.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/dataObject/SequenceDO.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/App.java
 /Users/dander/Documents/Java/Open-Source/JavaLearning/miaosha/src/main/java/com/miaoshaproject/service/impl/ItemServiceImpl.java

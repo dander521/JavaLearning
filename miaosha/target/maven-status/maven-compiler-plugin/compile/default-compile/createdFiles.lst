@@ -23,6 +23,8 @@ com/miaoshaproject/dao/SequenceDOMapper.class
 com/miaoshaproject/controller/GlobalExceptionHandle.class
 com/miaoshaproject/error/BusinessException.class
 com/miaoshaproject/dataObject/ItemStockDO.class
+com/miaoshaproject/serializer/JodaDateTimeJsonSerializer.class
+com/miaoshaproject/serializer/JodaDateTimeJsonDeserializer.class
 com/miaoshaproject/service/impl/ItemServiceImpl.class
 com/miaoshaproject/controller/ItemController.class
 com/miaoshaproject/validator/ValidatorImpl.class

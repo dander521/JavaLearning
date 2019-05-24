@@ -3,6 +3,7 @@ package com.miaoshaproject.controller;
 import com.miaoshaproject.controller.viewObject.ItemVO;
 import com.miaoshaproject.error.BusinessException;
 import com.miaoshaproject.response.CommonReturnType;
+import com.miaoshaproject.service.CacheService;
 import com.miaoshaproject.service.ItemService;
 import com.miaoshaproject.service.model.ItemModel;
 import org.joda.time.format.DateTimeFormat;
@@ -33,6 +34,9 @@ public class ItemController extends BaseController {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private CacheService cacheService;
+
     @RequestMapping(value = "/createItem", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
     @ResponseBody
     public CommonReturnType createItem(String title, String description, BigDecimal price, Integer stock, String imgUrl) throws BusinessException {
@@ -55,11 +59,18 @@ public class ItemController extends BaseController {
     @RequestMapping(value = "/getItem", method = {RequestMethod.GET})
     @ResponseBody
     public CommonReturnType getItem(Integer id) {
-        ItemModel itemModel = (ItemModel) redisTemplate.opsForValue().get("item_"+id);
+        // 本地
+        ItemModel itemModel = (ItemModel) cacheService.getFromCommonCache("item_"+id);
         if (itemModel == null) {
-            itemModel = itemService.getItemById(id);
-            redisTemplate.opsForValue().set("item_"+id, itemModel);
-            redisTemplate.expire("item_"+id, 10, TimeUnit.MINUTES);
+            // redis
+            itemModel = (ItemModel) redisTemplate.opsForValue().get("item_"+id);
+            if (itemModel == null) {
+                // 数据库
+                itemModel = itemService.getItemById(id);
+                redisTemplate.opsForValue().set("item_"+id, itemModel);
+                redisTemplate.expire("item_"+id, 10, TimeUnit.MINUTES);
+            }
+            cacheService.setCommonCache("item_"+id, itemModel);
         }
 
         ItemVO itemVO = convertVOFromItemModel(itemModel);
