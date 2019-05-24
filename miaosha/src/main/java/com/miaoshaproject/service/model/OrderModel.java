@@ -1,8 +1,9 @@
 package com.miaoshaproject.service.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class OrderModel {
+public class OrderModel implements Serializable {
 
     // 交易号 20190517000000001282
     private String id;

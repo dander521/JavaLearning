@@ -9,6 +9,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Controller("item")
@@ -27,6 +29,9 @@ public class ItemController extends BaseController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @RequestMapping(value = "/createItem", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
     @ResponseBody
@@ -50,7 +55,13 @@ public class ItemController extends BaseController {
     @RequestMapping(value = "/getItem", method = {RequestMethod.GET})
     @ResponseBody
     public CommonReturnType getItem(Integer id) {
-        ItemModel itemModel = itemService.getItemById(id);
+        ItemModel itemModel = (ItemModel) redisTemplate.opsForValue().get("item_"+id);
+        if (itemModel == null) {
+            itemModel = itemService.getItemById(id);
+            redisTemplate.opsForValue().set("item_"+id, itemModel);
+            redisTemplate.expire("item_"+id, 10, TimeUnit.MINUTES);
+        }
+
         ItemVO itemVO = convertVOFromItemModel(itemModel);
         return CommonReturnType.creat(itemVO);
     }
