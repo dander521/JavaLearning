@@ -21,7 +21,6 @@ public class App
     @Autowired
     UserDOMapper userDOMapper;
 
-
     @RequestMapping("/")
     public String home() {
         UserDO userDO = userDOMapper.selectByPrimaryKey("1558062771294");
@@ -38,6 +37,5 @@ public class App
         System.out.println( "Hello World!" );
         // 启动springboot项目
         SpringApplication.run(App.class, args);
-
     }
 }

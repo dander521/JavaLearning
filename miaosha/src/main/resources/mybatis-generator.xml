@@ -6,6 +6,9 @@
 <generatorConfiguration>
 
     <context id="MysqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+
+
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
@@ -24,6 +27,7 @@
 
         <!-- 对于生成的mapper所在目录 -->
         <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources"/>
+
 
 <!--        <table tableName="user_info" domainObjectName="UserDO"></table>-->
 <!--        <table tableName="user_password" domainObjectName="UserPasswordDO"></table>-->
