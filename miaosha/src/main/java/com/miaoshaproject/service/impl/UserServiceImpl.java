@@ -14,7 +14,10 @@ import com.miaoshaproject.validator.ValidatorImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,6 +30,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ValidatorImpl validator;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public UserModel validateLogin(String telephone, String encrptPassword) throws BusinessException {
@@ -78,6 +84,17 @@ public class UserServiceImpl implements UserService {
         }
 
         return convertFromDataObject(userDO, userPasswordDO);
+    }
+
+    @Override
+    public UserModel getUserByIdInCache(String id) {
+        UserModel userModel = (UserModel) redisTemplate.opsForValue().get("user_id" + id);
+        if (userModel == null) {
+            userModel = this.getUserById(id);
+            redisTemplate.opsForValue().set("user_id" + id, userModel);
+            redisTemplate.expire("user_id" + id, 10, TimeUnit.MINUTES);
+        }
+        return userModel;
     }
 
     private UserModel convertFromDataObject(UserDO userDO, UserPasswordDO userPasswordDO) {

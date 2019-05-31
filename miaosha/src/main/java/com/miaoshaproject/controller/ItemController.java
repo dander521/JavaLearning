@@ -5,6 +5,7 @@ import com.miaoshaproject.error.BusinessException;
 import com.miaoshaproject.response.CommonReturnType;
 import com.miaoshaproject.service.CacheService;
 import com.miaoshaproject.service.ItemService;
+import com.miaoshaproject.service.PromoService;
 import com.miaoshaproject.service.model.ItemModel;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -12,10 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,6 +34,9 @@ public class ItemController extends BaseController {
 
     @Autowired
     private CacheService cacheService;
+
+    @Autowired
+    private PromoService promoService;
 
     @RequestMapping(value = "/createItem", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
     @ResponseBody
@@ -75,6 +76,16 @@ public class ItemController extends BaseController {
 
         ItemVO itemVO = convertVOFromItemModel(itemModel);
         return CommonReturnType.creat(itemVO);
+    }
+
+
+    @RequestMapping(value = "/publishPromo", method = {RequestMethod.GET})
+    @ResponseBody
+    public CommonReturnType publishPromo(@RequestParam(name = "id") Integer id) {
+        promoService.publishPromo(id);
+        Integer stock = (Integer) redisTemplate.opsForValue().get("promo_stock" + id);
+        System.out.println("发布时的库存是 " + stock);
+        return CommonReturnType.creat(null);
     }
 
     private ItemVO convertVOFromItemModel(ItemModel itemModel) {

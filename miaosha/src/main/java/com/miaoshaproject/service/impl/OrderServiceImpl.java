@@ -1,5 +1,6 @@
 package com.miaoshaproject.service.impl;
 
+import com.alibaba.druid.sql.ast.expr.SQLCaseExpr;
 import com.miaoshaproject.dao.OrderDOMapper;
 import com.miaoshaproject.dao.SequenceDOMapper;
 import com.miaoshaproject.dataObject.OrderDO;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.jws.soap.SOAPBinding;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,11 +46,13 @@ public class OrderServiceImpl implements OrderService {
 
 
         // 校验 商品存在 用户合法 数量正确
-        ItemModel itemModel = itemService.getItemById(itemId);
+//        ItemModel itemModel = itemService.getItemById(itemId);
+        ItemModel itemModel = itemService.getItemByIdInCache(itemId);
         if (itemModel == null) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "商品信息不正确");
         }
-        UserModel userModel = userService.getUserById(userId);
+//        UserModel userModel = userService.getUserById(userId);
+        UserModel userModel = userService.getUserByIdInCache(userId);
         if (userModel == null) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "用户信息不正确");
         }
