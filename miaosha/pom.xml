@@ -87,11 +87,17 @@
           <version>2.1.4.RELEASE</version>
       </dependency>
 
-      // 本地热点缓存
+      <!--本地热点缓存-->
       <dependency>
           <groupId>com.google.guava</groupId>
           <artifactId>guava</artifactId>
           <version>19.0</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.rocketmq</groupId>
+          <artifactId>rocketmq-client</artifactId>
+          <version>4.3.0</version>
       </dependency>
 
   </dependencies>

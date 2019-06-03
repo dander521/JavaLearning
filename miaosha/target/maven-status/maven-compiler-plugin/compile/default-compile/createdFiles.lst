@@ -2,6 +2,7 @@ com/miaoshaproject/response/CommonReturnType.class
 com/miaoshaproject/dataObject/UserDO.class
 com/miaoshaproject/dao/OrderDOMapper.class
 com/miaoshaproject/dao/ItemDOMapper.class
+com/miaoshaproject/mq/MqConsumer$1.class
 com/miaoshaproject/service/model/ItemModel.class
 com/miaoshaproject/service/PromoService.class
 com/miaoshaproject/service/ItemService.class
@@ -13,6 +14,7 @@ com/miaoshaproject/congif/WebServerConfiguration$1.class
 com/miaoshaproject/controller/BaseController.class
 com/miaoshaproject/dao/UserDOMapper.class
 com/miaoshaproject/service/impl/OrderServiceImpl.class
+com/miaoshaproject/mq/MqConsumer.class
 com/miaoshaproject/dataObject/ItemDO.class
 com/miaoshaproject/dao/UserPasswordDOMapper.class
 com/miaoshaproject/dataObject/PromoDO.class
@@ -32,6 +34,7 @@ com/miaoshaproject/controller/viewObject/ItemVO.class
 com/miaoshaproject/controller/UserController.class
 com/miaoshaproject/service/UserService.class
 com/miaoshaproject/error/EmBusinessError.class
+com/miaoshaproject/mq/MqProducer.class
 com/miaoshaproject/validator/ValidationResult.class
 com/miaoshaproject/dataObject/OrderDO.class
 com/miaoshaproject/service/impl/PromoServiceImpl.class
