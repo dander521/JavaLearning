@@ -21,13 +21,12 @@
         <!-- 对于生成的pojo所在包 -->
         <javaModelGenerator targetPackage="com.miaoshaproject.dataObject" targetProject="src/main/java"/>
 
-        <!-- 配置mapper对应的java映射 -->
-        <javaClientGenerator targetPackage="com.miaoshaproject.dao" targetProject="src/main/java"
-                             type="XMLMAPPER"/>
-
         <!-- 对于生成的mapper所在目录 -->
         <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources"/>
 
+        <!-- 配置mapper对应的java映射 -->
+        <javaClientGenerator targetPackage="com.miaoshaproject.dao" targetProject="src/main/java"
+                             type="XMLMAPPER"/>
 
 <!--        <table tableName="user_info" domainObjectName="UserDO"></table>-->
 <!--        <table tableName="user_password" domainObjectName="UserPasswordDO"></table>-->
@@ -36,6 +35,6 @@
 
 <!--        <table tableName="order_info" domainObjectName="OrderDO"></table>-->
 <!--        <table tableName="sequence_info" domainObjectName="SequenceDO"></table>-->
-<!--        <table tableName="promo" domainObjectName="PromoDO"></table>-->
+        <table tableName="stock_log" domainObjectName="StockLogDO"></table>
     </context>
 </generatorConfiguration>

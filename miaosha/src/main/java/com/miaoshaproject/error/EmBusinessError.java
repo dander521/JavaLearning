@@ -10,7 +10,7 @@ public enum EmBusinessError implements CommonError {
     USER_NOT_LOGIN(20003, "用户还未登录"),
 
     STOCK_NOT_ENOUGH(30001, "库存不足"),
-
+    MQ_SEND_FAIL(30002, "库存异步更新失败"),
     ;
 
 

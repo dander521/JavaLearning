@@ -3,8 +3,10 @@ package com.miaoshaproject.service.impl;
 import com.alibaba.druid.sql.ast.expr.SQLCaseExpr;
 import com.miaoshaproject.dao.OrderDOMapper;
 import com.miaoshaproject.dao.SequenceDOMapper;
+import com.miaoshaproject.dao.StockLogDOMapper;
 import com.miaoshaproject.dataObject.OrderDO;
 import com.miaoshaproject.dataObject.SequenceDO;
+import com.miaoshaproject.dataObject.StockLogDO;
 import com.miaoshaproject.error.BusinessException;
 import com.miaoshaproject.error.EmBusinessError;
 import com.miaoshaproject.service.ItemService;
@@ -19,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import javax.jws.soap.SOAPBinding;
 import java.math.BigDecimal;
@@ -40,9 +44,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private SequenceDOMapper sequenceDOMapper;
 
+    @Autowired
+    private StockLogDOMapper stockLogDOMapper;
+
     @Override
     @Transactional
-    public OrderModel createOrder(String userId, Integer itemId, Integer promoId, Integer amount) throws BusinessException {
+    public OrderModel createOrder(String userId, Integer itemId, Integer promoId, Integer amount, String stockLogId) throws BusinessException {
 
 
         // 校验 商品存在 用户合法 数量正确
@@ -69,7 +76,7 @@ public class OrderServiceImpl implements OrderService {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "活动信息不正确");
         }
 
-        // 落单减少库存
+        // 落单减少 redis 库存
         boolean result = itemService.decreaseStock(itemId, amount);
         if (!result) {
             throw new BusinessException(EmBusinessError.STOCK_NOT_ENOUGH);
@@ -90,12 +97,34 @@ public class OrderServiceImpl implements OrderService {
         // 商品销量增加
         itemService.increaseSales(itemId, amount);
 
+        // 设置库存流水状态成功
+        StockLogDO stockLogDO = stockLogDOMapper.selectByPrimaryKey(stockLogId);
+        if (stockLogDO == null) {
+            throw new BusinessException(EmBusinessError.UNKNOW_ERROR);
+        }
+        stockLogDO.setStatus(2);
+        stockLogDOMapper.updateByPrimaryKey(stockLogDO);
+
+
+//        // Springboot 提供的事务操作方法 当前事务操作成功 方法调用
+//        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+//            @Override
+//            public void afterCommit() {
+//                // 异步更新库存
+//                boolean mqResult = itemService.asyncDecreaseStock(itemId, amount);
+////                if (!mqResult) {
+////                    itemService.increaseStock(itemId, amount);
+////                    throw new BusinessException(EmBusinessError.MQ_SEND_FAIL);
+////                }
+//            }
+//        });
+
         // 返回前端
         return orderModel;
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW) // 不论其他事务是否成功 该方法必须生成新的id
-    private String generateOrderNo() {
+    public String generateOrderNo() {
         StringBuilder stringBuilder = new StringBuilder();
         // 16 位
         // 8位时间 年月日
