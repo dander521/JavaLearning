@@ -26,7 +26,7 @@ public class GlobalExceptionHandle {
             BusinessException businessException = (BusinessException)ex;
             responseData.put("errCode", businessException.getErrorCode());
             responseData.put("errMsg", businessException.getErrorMsg());
-        } else if (ex instanceof ServletRequestBindingException) { // 参数确实 或 错误 405
+        } else if (ex instanceof ServletRequestBindingException) { // 参数缺失 或 错误 405
             responseData.put("errCode", EmBusinessError.PARAMETER_VALIDATION_ERROR.getErrorCode());
             responseData.put("errMsg", "url绑定路由问题");
         } else if (ex instanceof NoHandlerFoundException) { // 404

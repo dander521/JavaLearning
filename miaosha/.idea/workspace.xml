@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="add259ba-aed5-435f-a546-1900d91a56aa" name="Default Changelist" comment="bug修改&#10;字符串大小写后台与前端页面区分">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/error/EmBusinessError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/error/EmBusinessError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/mq/MqProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/mq/MqProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/ItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/ItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/impl/ItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/impl/ItemServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" afterDir="false" />
-    </list>
+    <list default="true" id="add259ba-aed5-435f-a546-1900d91a56aa" name="Default Changelist" comment="bug修改&#10;字符串大小写后台与前端页面区分" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/controller/OrderController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="77" column="1" lean-forward="true" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
+            <state relative-caret-position="450">
+              <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -63,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/mq/MqProducer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="122" selection-start-line="122" selection-end-line="122" />
+            <state relative-caret-position="312">
+              <caret line="61" column="13" selection-start-line="54" selection-end-line="62" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -249,8 +239,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/OrderService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miaoshaproject/mq/MqProducer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/impl/ItemServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/miaoshaproject/controller/OrderController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/impl/OrderServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/miaoshaproject/controller/OrderController.java" />
       </list>
     </option>
   </component>
@@ -291,7 +281,8 @@
   <component name="MavenRunner">
     <option name="jreName" value="1.8" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="777" />
@@ -619,7 +610,7 @@
       <workItem from="1559184773647" duration="16324000" />
       <workItem from="1559282906510" duration="20948000" />
       <workItem from="1559528927575" duration="1386000" />
-      <workItem from="1560133404630" duration="12545000" />
+      <workItem from="1560133404630" duration="13426000" />
     </task>
     <task id="LOCAL-00001" summary="添加注册相关逻辑">
       <created>1557907852729</created>
@@ -653,7 +644,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215483000" />
+    <option name="totallyTimeSpent" value="216364000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -665,10 +656,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="23" width="1280" height="777" extended-state="6" />
+    <frame x="1" y="23" width="1280" height="777" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4976526" visible="true" weight="0.25767368" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4976526" visible="true" weight="0.27059773" />
       <window_info id="Structure" order="1" sideWeight="0.5023474" side_tool="true" weight="0.33718055" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -679,12 +670,12 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.22204968" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4962153" weight="0.23941606" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49705634" visible="true" weight="0.25839415" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49705634" weight="0.48321167" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4995878" weight="0.32846716" />
       <window_info anchor="bottom" id="Spring" order="7" sideWeight="0.49876338" weight="0.33850932" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49596122" weight="0.4978102" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49596122" visible="true" weight="0.055474453" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5037847" side_tool="true" weight="0.2788321" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.54740316" weight="0.28739002" />
@@ -744,43 +735,43 @@
           <properties />
           <option name="timeStamp" value="44" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/mq/MqProducer.java</url>
           <line>82</line>
           <properties />
           <option name="timeStamp" value="47" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/mq/MqProducer.java</url>
           <line>61</line>
           <properties />
           <option name="timeStamp" value="48" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/controller/OrderController.java</url>
           <line>69</line>
           <properties />
           <option name="timeStamp" value="49" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/mq/MqProducer.java</url>
           <line>102</line>
           <properties />
           <option name="timeStamp" value="50" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/mq/MqProducer.java</url>
           <line>113</line>
           <properties />
           <option name="timeStamp" value="51" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/mq/MqProducer.java</url>
           <line>55</line>
           <properties />
           <option name="timeStamp" value="52" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
+        <line-breakpoint type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/service/PromoService.java</url>
           <line>9</line>
           <properties class="com.miaoshaproject.service.PromoService" method="publishPromo">
@@ -1213,20 +1204,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/mq/MqProducer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/controller/OrderController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="122" selection-start-line="122" selection-end-line="122" />
+        <state relative-caret-position="450">
+          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/controller/OrderController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/miaoshaproject/mq/MqProducer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="77" column="1" lean-forward="true" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
+        <state relative-caret-position="312">
+          <caret line="61" column="13" selection-start-line="54" selection-end-line="62" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
