@@ -1,6 +1,5 @@
 package com.miaoshaproject.service.impl;
 
-import com.alibaba.druid.sql.ast.expr.SQLCaseExpr;
 import com.miaoshaproject.dao.OrderDOMapper;
 import com.miaoshaproject.dao.SequenceDOMapper;
 import com.miaoshaproject.dao.StockLogDOMapper;
@@ -15,16 +14,11 @@ import com.miaoshaproject.service.UserService;
 import com.miaoshaproject.service.model.ItemModel;
 import com.miaoshaproject.service.model.OrderModel;
 import com.miaoshaproject.service.model.UserModel;
-import com.sun.tools.corba.se.idl.constExpr.Or;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionSynchronization;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
-
-import javax.jws.soap.SOAPBinding;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -104,20 +98,6 @@ public class OrderServiceImpl implements OrderService {
         }
         stockLogDO.setStatus(2);
         stockLogDOMapper.updateByPrimaryKey(stockLogDO);
-
-
-//        // Springboot 提供的事务操作方法 当前事务操作成功 方法调用
-//        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
-//            @Override
-//            public void afterCommit() {
-//                // 异步更新库存
-//                boolean mqResult = itemService.asyncDecreaseStock(itemId, amount);
-////                if (!mqResult) {
-////                    itemService.increaseStock(itemId, amount);
-////                    throw new BusinessException(EmBusinessError.MQ_SEND_FAIL);
-////                }
-//            }
-//        });
 
         // 返回前端
         return orderModel;

@@ -38,7 +38,6 @@ public class UserController extends BaseController {
     @Autowired
     private RedisTemplate redisTemplate;
 
-
     @RequestMapping(value = "/login", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
     @ResponseBody
     public CommonReturnType login(@RequestParam(name = "telephone") String telephone, @RequestParam(name = "password") String password) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -49,16 +48,10 @@ public class UserController extends BaseController {
 
         UserModel userModel = userService.validateLogin(telephone, EncodeByMD5(password));
 
-//        this.httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
-//        System.out.println("登录状态" + this.httpServletRequest.getSession().getAttribute("IS_LOGIN"));
-//        this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
-
-
         String uuidToken = UUID.randomUUID().toString();
         uuidToken = uuidToken.replace("-","");
         redisTemplate.opsForValue().set(uuidToken,userModel);
         redisTemplate.expire(uuidToken,1, TimeUnit.HOURS);
-
 
         return CommonReturnType.creat(uuidToken);
     }

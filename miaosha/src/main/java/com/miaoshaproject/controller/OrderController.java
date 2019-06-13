@@ -44,12 +44,6 @@ public class OrderController extends BaseController {
     @ResponseBody
     public CommonReturnType createOrder(Integer itemId, Integer amount, Integer promoId, String stockLogId) throws BusinessException {
 
-//        Boolean isLogin = (Boolean)httpServletRequest.getSession().getAttribute("IS_LOGIN");
-//        if (isLogin == null || !isLogin.booleanValue()) {
-//            throw new BusinessException(EmBusinessError.USER_NOT_LOGIN);
-//        }
-
-
         String token = httpServletRequest.getParameterMap().get("token")[0];
         if (StringUtils.isEmpty(token)) {
             throw new BusinessException(EmBusinessError.USER_NOT_LOGIN);
@@ -59,9 +53,6 @@ public class OrderController extends BaseController {
         if (userModel == null) {
             throw new BusinessException(EmBusinessError.USER_NOT_LOGIN, "登录已失效，请重新登录");
         }
-
-//        UserModel userModel = (UserModel) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-//        OrderModel orderModel = orderService.createOrder(userModel.getId(), itemId, promoId, amount);
 
         if (redisTemplate.hasKey("promo_stock_invalid_" + itemId)) {
             throw new BusinessException(EmBusinessError.STOCK_NOT_ENOUGH);
