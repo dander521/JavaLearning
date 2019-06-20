@@ -49,6 +49,7 @@ public class UserController extends BaseController {
         UserModel userModel = userService.validateLogin(telephone, EncodeByMD5(password));
 
         String uuidToken = UUID.randomUUID().toString();
+        System.out.println("uuidToken =" + uuidToken);
         uuidToken = uuidToken.replace("-","");
         redisTemplate.opsForValue().set(uuidToken,userModel);
         redisTemplate.expire(uuidToken,1, TimeUnit.HOURS);

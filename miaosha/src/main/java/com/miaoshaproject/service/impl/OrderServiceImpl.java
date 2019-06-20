@@ -45,29 +45,14 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderModel createOrder(String userId, Integer itemId, Integer promoId, Integer amount, String stockLogId) throws BusinessException {
 
-
         // 校验 商品存在 用户合法 数量正确
-//        ItemModel itemModel = itemService.getItemById(itemId);
         ItemModel itemModel = itemService.getItemByIdInCache(itemId);
         if (itemModel == null) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "商品信息不正确");
         }
-//        UserModel userModel = userService.getUserById(userId);
-        UserModel userModel = userService.getUserByIdInCache(userId);
-        if (userModel == null) {
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "用户信息不正确");
-        }
 
         if (amount < 0 || amount > 99) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "数量信息不正确");
-        }
-
-        if (promoId != null) {
-            if (promoId != itemModel.getPromoModel().getId()) {
-                throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "活动信息不正确");
-            }
-        } else if (itemModel.getPromoModel() != null && itemModel.getPromoModel().getStatus() != 2) {
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "活动信息不正确");
         }
 
         // 落单减少 redis 库存

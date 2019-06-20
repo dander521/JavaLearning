@@ -8,4 +8,7 @@ public interface PromoService {
 
     // 发布活动
     public void publishPromo(Integer promoId);
+
+    // 生成秒杀令牌
+    String generateSecondKillToken(Integer promoId, Integer itemId, String userId);
 }
